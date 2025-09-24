@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/lab/null">
+  <link rel="icon" href="/lab/null">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Admin">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Smart eyewear’s interaction mode has attracted significant research attention. While most commercial devices have adopted touch panels situated on the temple front of eyeglasses for interaction, this">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RimSense: Enabling Touch-based Interaction on Eyeglass Rim Using Piezoelectric Sensors">
+<meta property="og:url" content="http://jinlab-sustech.github.io/lab/2024/10/16/project11/index.html">
+<meta property="og:site_name" content="AIMS Lab - Advanced Intelligent Mobile Systems Laboratory">
+<meta property="og:description" content="Smart eyewear’s interaction mode has attracted significant research attention. While most commercial devices have adopted touch panels situated on the temple front of eyeglasses for interaction, this">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://jinlab-sustech.github.io/lab/img/projects/11.png">
+<meta property="article:published_time" content="2024-10-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-24T14:20:45.996Z">
+<meta property="article:author" content="Admin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://jinlab-sustech.github.io/lab/img/projects/11.png">
+  
+  
+  
+  <title>RimSense: Enabling Touch-based Interaction on Eyeglass Rim Using Piezoelectric Sensors - AIMS Lab - Advanced Intelligent Mobile Systems Laboratory</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/6.9.96/css/materialdesignicons.min.css">
+
+
+<link  rel="stylesheet" href="/lab/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/lab/css/highlight.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"jinlab-sustech.github.io","root":"/lab/","version":"1.9.2","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/lab/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/lab/js/utils.js" ></script>
+  <script  src="/lab/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 30vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/lab/">
+      <strong>AIMS Lab</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/lab/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                
+                Research Areas
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/lab/categories/Acoustic-Sensing/">
+                    
+                    Acoustic Sensing
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/lab/categories/mmWave-Sensing/">
+                    
+                    mmWave Sensing
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/lab/categories/Healthcare/">
+                    
+                    Healthcare
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/lab/categories/Blockchain/">
+                    
+                    Blockchain
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/lab/publications">
+                
+                Publication
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                
+                People
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://jinzhang-sustech.github.io/">
+                    
+                    Prof. Jin Zhang
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/lab/member">
+                    
+                    Members
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/lab/gallery">
+                
+                Gallery
+              </a>
+            </li>
+          
+        
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/lab/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.4)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">RimSense: Enabling Touch-based Interaction on Eyeglass Rim Using Piezoelectric Sensors</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">RimSense: Enabling Touch-based Interaction on Eyeglass Rim Using Piezoelectric Sensors</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><img src="/lab/img/projects/11-1.jpg" srcset="/lab/img/loading.gif" lazyload></p>
+<p>Smart eyewear’s interaction mode has attracted significant research attention. While most commercial devices have adopted touch panels situated on the temple front of eyeglasses for interaction, this paper identifies a drawback stemming from the unparalleled plane between the touch panel and the display, which disrupts the direct mapping between gestures and the manipulated objects on display. Therefore, this paper proposes RimSense, a proof-of-concept design for smart eyewear, to introduce an alternative realm for interaction - touch gestures on eyewear rim. RimSense leverages piezoelectric (PZT) transducers to convert the eyeglass rim into a touch-sensitive surface. When users touch the rim, the alteration in the eyeglass’s structural signal manifests its effect into a channel frequency response (CFR). This allows RimSense to recognize the executed touch gestures based on the collected CFR patterns. Technically, we employ a buffered chirp as the probe signal to fulfil the sensing granularity and noise resistance requirements. Additionally, we present a deep learning-based gesture recognition framework tailored for fine-grained time sequence prediction and further integrated with a Finite-State Machine (FSM) algorithm for event-level prediction to suit the interaction experience for gestures of varying durations. We implement a functional eyewear prototype with two commercial PZT transducers. RimSense can recognize eight touch gestures on the eyeglass rim and estimate gesture durations simultaneously, allowing gestures of varying lengths to serve as distinct inputs. We evaluate the performance of RimSense on 30 subjects and show that it can sense eight gestures and an additional negative class with an F1-score of 0.95 and a relative duration estimation error of 11%. We further make the system work in real-time and conduct a user study on 14 subjects to assess the practicability of RimSense through interactions with two demo applications. The user study demonstrates RimSense’s good performance, high usability, learnability and enjoyability. Additionally, we conduct interviews with the subjects, and their comments provide valuable insight for future eyewear design.</p>
+<p><a href="/lab/files/wentao-rim.pdf">Download PDF</a></p>
+<div style="text-align: center;">
+    <video width="480" height="270" controls>
+        <source src="/lab/img/projects/11.mp4" type="video/mp4">
+    </video>
+</div>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/lab/categories/Acoustic-Sensing/" class="category-chain-item">Acoustic Sensing</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/lab/2024/12/13/project19/" title="HomeOSD: Appliance Operating-Status Detection Using mmWave Radar">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">HomeOSD: Appliance Operating-Status Detection Using mmWave Radar</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/lab/2024/10/15/project10/" title="EyeGesener: Eye Gesture Listener for Smart Glasses Interaction Using Acoustic Sensing">
+                        <span class="hidden-mobile">EyeGesener: Eye Gesture Listener for Smart Glasses Interaction Using Acoustic Sensing</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=200&t=m&d=AWpYYzoK3ReJVSEYoiSh8IHUrcqkici37Bvw_uAWJUE&co=2d78ad&cmo=3acc3a&cmn=ff5353&ct=ffffff"></script>   
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/lab/js/events.js" ></script>
+<script  src="/lab/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/lab/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/lab/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
